@@ -1,8 +1,8 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
 const FoodSchema = new Schema({
   id: Number,
-  category: String,
+  category: { type: Schema.Types.ObjectId, ref: "Category" },
   foodName: String,
   price: Number,
   imagePath: String,
@@ -11,4 +11,4 @@ const FoodSchema = new Schema({
   sale: Number,
 });
 
-export const FoodModel = model("Food", FoodSchema);
+export const FoodModel = mongoose.models.Food || model("Food", FoodSchema);

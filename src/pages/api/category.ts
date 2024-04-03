@@ -1,6 +1,6 @@
 import { corsAllow } from "@/helper/cors";
 import connect from "@/helper/db";
-import { createFood, getFoods } from "@/services/food";
+import { createCategory, getCategories } from "@/services/category";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -14,15 +14,15 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
-        const result = await createFood(body.name);
+        const result = await createCategory(body.name);
         return res.status(200).json(result);
       } catch (e: any) {
         return res.status(400).json({ message: e.message });
       }
     case "GET":
       try {
-        const foods = await getFoods();
-        return res.status(200).json({ foods: foods });
+        const categories = await getCategories();
+        return res.status(200).json({ categories: categories });
       } catch (e: any) {
         return res.status(400).json({ message: e.message });
       }
