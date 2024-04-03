@@ -18,11 +18,11 @@ export const loginService = async (email: string, password: string) => {
 };
 
 export const createUser = async (
-  firstName: string,
-  lastName: string,
+  name: string,
   email: string,
-  age: number
+  address: string,
+  password: string
 ) => {
-  const createUser = UserModel.create({ firstName, lastName, email, age });
+  const createUser = UserModel.create({ name, address, email, password });
   return createUser;
 };
