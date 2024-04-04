@@ -10,6 +10,7 @@ export default async function handler(
   await connect();
   await corsAllow(req, res);
   const body = req.body;
+  console.log(body);
   try {
     const result = await createUser(
       body.name,

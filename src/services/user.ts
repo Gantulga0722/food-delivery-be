@@ -23,6 +23,18 @@ export const createUser = async (
   address: string,
   password: string
 ) => {
-  const createUser = UserModel.create({ name, address, email, password });
+  try {
+    const createUser = await UserModel.create({
+      name,
+      address,
+      email,
+      password,
+    });
+    console.log(createUser);
+    return createUser;
+  } catch (e: any) {
+    console.log(e.message);
+  }
+
   return createUser;
 };

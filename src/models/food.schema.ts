@@ -1,7 +1,6 @@
 import mongoose, { model, Schema } from "mongoose";
 
 const FoodSchema = new Schema({
-  id: Number,
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   foodName: String,
   price: Number,
