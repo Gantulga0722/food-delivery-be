@@ -10,11 +10,19 @@ export default async function handler(
   await connect();
   await corsAllow(req, res);
   const body = req.body;
+  console.log(body);
 
   switch (req.method) {
     case "POST":
       try {
-        const result = await createFood(body.name);
+        const result = await createFood(
+          body.foodName,
+          body.category,
+          body.price,
+          body.imagePath,
+          body.ingredients,
+          body.sale
+        );
         return res.status(200).json(result);
       } catch (e: any) {
         return res.status(400).json({ message: e.message });

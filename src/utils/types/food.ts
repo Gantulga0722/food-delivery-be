@@ -1,10 +1,10 @@
 export type FoodType = {
-  name: string;
-  categoryId: string;
+  foodName: string;
+  category: string;
   price: number;
   image: string;
   description: string;
   sale?: number;
-  stock: number;
-  ingredients: string[];
+  stock?: number;
+  ingredients: string;
 };
