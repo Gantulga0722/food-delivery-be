@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connect from "@/helper/db";
-import { loginService } from "@/services/user";
+import { getUsers, loginService } from "@/services/user";
 import mongoose from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
