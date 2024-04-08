@@ -10,7 +10,6 @@ export const loginService = async (email: string, password: string) => {
       user.email == email && user.password == password;
       return user;
     });
-    console.log("checked", checkedUser);
     const userInfo = {
       email: checkedUser[0].email,
       name: checkedUser[0].name,
