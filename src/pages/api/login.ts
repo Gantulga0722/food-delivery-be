@@ -31,7 +31,7 @@ export default async function handler(
     if (token) {
       return res
         .status(200)
-        .json({ token: token, message: "Login successful" });
+        .json({ token: token, message: "successful" });
     }
   } catch (e: any) {
     return res.status(400).json({ message: e.message });

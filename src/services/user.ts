@@ -6,15 +6,23 @@ import jwt from "jsonwebtoken";
 export const loginService = async (email: string, password: string) => {
   try {
     const users = await getUsers();
-    const checkedUser = users.filter((user) => {
-      user.email == email && user.password == password;
-      return user;
-    });
+    const checkedUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (!checkedUser) {
+      throw new Error("Invalid");
+    }
+    const secretKey = process.env.MySecretKey;
+    if (!secretKey) {
+      throw new Error("Key is missing.");
+    }
+
     const userInfo = {
-      email: checkedUser[0].email,
-      name: checkedUser[0].name,
+      email: checkedUser.email,
+      name: checkedUser.name,
     };
-    const newToken = jwt.sign(userInfo, "my-super-duper-secret-key", {
+    const newToken = jwt.sign(userInfo, secretKey, {
       expiresIn: "1h",
     });
     return newToken;
