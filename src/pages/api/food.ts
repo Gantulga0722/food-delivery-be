@@ -1,6 +1,7 @@
 import { corsAllow } from "@/helper/cors";
 import connect from "@/helper/db";
 import { createFood, getFoods } from "@/services/food";
+import { AnyError } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,7 +11,18 @@ export default async function handler(
   await connect();
   await corsAllow(req, res);
   const body = req.body;
-  console.log(body);
+  // const header = req.headers;
+  // const authorization = header.authorization;
+  // const token = authorization?.split("")[1] || "";
+
+  // try {
+  //   const result = jwt.verify(token as string, process.TOKE_SECRET || "", {});
+  //   const decoded = jwt.decode(token);
+  //   const date = new Date(decoded.exp * 1000);
+  // } catch (e: any) {
+  //   console.log(e.message);
+  //   throw new Error(e.message);
+  // }
 
   switch (req.method) {
     case "POST":

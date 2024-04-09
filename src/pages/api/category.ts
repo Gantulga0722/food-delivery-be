@@ -15,7 +15,7 @@ export default async function handler(
   await connect();
   await corsAllow(req, res);
   const body = req.body;
-  console.log("request", req.method);
+  console.log("request", req.body);
 
   switch (req.method) {
     case "POST":
@@ -34,7 +34,7 @@ export default async function handler(
       }
     case "PUT":
       try {
-        const categories = await updateCategory(body._id);
+        const categories = await updateCategory(body._id, body.name);
         return res.status(200).json({ categories: categories });
       } catch (e: any) {
         return res.status(400).json({ message: e.message });

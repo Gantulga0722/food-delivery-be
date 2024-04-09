@@ -30,9 +30,9 @@ export const deleteCategory = async (id: string) => {
     throw new Error(e.message);
   }
 };
-export const updateCategory = async (id: string) => {
+export const updateCategory = async (id: string, name: string) => {
   try {
-    await CategoryModel.deleteOne({ _id: id });
+    await CategoryModel.findByIdAndUpdate(id, { name: name });
   } catch (e: any) {
     throw new Error(e.message);
   }
