@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { UserModel } from "@/models/user.schema";
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -11,12 +12,27 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MyPassword,
   },
 });
-console.log(process.env.MyEmail);
-console.log(process.env.MyPassword);
+
+const isValidEmail = (email: any) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 export const sendVerificationEmail = async (email: string) => {
+  if (!isValidEmail(email)) {
+    return { success: false, message: "Invalid email address" };
+  }
+
   const veriCode = nanoid(6);
   try {
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return {
+        success: false,
+        message: "User does not exist",
+      };
+    }
+
     const mailOptions = {
       from: process.env.MyEmail,
       to: email,
@@ -28,5 +44,6 @@ export const sendVerificationEmail = async (email: string) => {
     console.log("Email sent: " + info.response);
   } catch (error) {
     console.error("Error sending email:", error);
+    return { success: false, message: "Error while sending email" };
   }
 };
