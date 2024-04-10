@@ -10,7 +10,7 @@ export default async function handler(
   await connect();
   await corsAllow(req, res);
   const body = req.body;
-  console.log("request", req.body);
+  console.log("request", body.email);
 
   switch (req.method) {
     case "POST":
