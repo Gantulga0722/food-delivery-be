@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev ",
     "build": "next build ",
-    "start": "next start",
+    "start": "NEXT_PUBLIC_BACKEND_URL=http: https://food-delivery-be-zeta.vercel.app/",
     "lint": "next lint"
   },
   "dependencies": {
